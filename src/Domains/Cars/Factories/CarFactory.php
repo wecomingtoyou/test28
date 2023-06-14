@@ -15,6 +15,7 @@ final class CarFactory extends Factory
     public function definition(): array
     {
         return [
+            'vin' => $this->faker->unique()->uuid,
             'mileage' => $this->faker->numberBetween(1000, 100000),
             'color' => $this->faker->colorName,
             'issued' => $this->faker->dateTime->format('Y-m-d'),

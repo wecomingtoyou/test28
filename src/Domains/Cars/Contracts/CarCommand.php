@@ -6,5 +6,5 @@ namespace Domains\Cars\Contracts;
 
 interface CarCommand
 {
-
+    public function delete(int $id): bool;
 }

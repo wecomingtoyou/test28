@@ -21,8 +21,8 @@ Route::name('cars:')
     ->namespace('Cars')
     ->group(function () {
         Route::get('', IndexController::class)->name('index');
-        Route::get('{car}', ShowController::class)->name('show');
+        Route::get('{id}', ShowController::class)->name('show');
         Route::post('', CreateController::class)->name('create');
-        Route::patch('{car}', UpdateController::class)->name('update');
-        Route::delete('{car}', DeleteController::class)->name('delete');
+        Route::patch('{id}', UpdateController::class)->name('update');
+        Route::delete('{id}', DeleteController::class)->name('delete');
     });

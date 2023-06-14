@@ -12,7 +12,7 @@ use Shared\Models\EloquentModel;
 final class Car extends EloquentModel
 {
     protected $fillable = [
-        'mileage', 'color', 'issued',
+        'vin', 'mileage', 'color', 'issued',
     ];
 
     public function model(): BelongsTo
