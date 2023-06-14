@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Apps\Api\V1\Requests\Cars;
 
-use Domains\Cars\DTO\NewCarData;
+use Domains\Cars\DTO\CarData;
 use Shared\Http\Requests\AbstractRequest;
 
 final class CreateRequest extends AbstractRequest
@@ -25,8 +25,8 @@ final class CreateRequest extends AbstractRequest
         ];
     }
 
-    public function toData(): NewCarData
+    public function toData(): CarData
     {
-        return NewCarData::make($this->validated());
+        return CarData::make($this->validated());
     }
 }

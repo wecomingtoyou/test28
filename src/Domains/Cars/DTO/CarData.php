@@ -7,7 +7,7 @@ namespace Domains\Cars\DTO;
 use Illuminate\Support\Str;
 use Shared\DTO\AbstractData;
 
-final class NewCarData extends AbstractData
+final class CarData extends AbstractData
 {
     private null|string $color = null;
     private null|int $mileage = null;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Apps\Api\V1\Requests\Cars;
 
+use Domains\Cars\DTO\CarData;
 use Shared\Http\Requests\AbstractRequest;
 
 final class UpdateRequest extends AbstractRequest
@@ -15,6 +16,17 @@ final class UpdateRequest extends AbstractRequest
 
     public function rules(): array
     {
-        // TODO: Implement rules() method.
+        return [
+            'vin' => ['sometimes', 'string', sprintf('unique:cars,vin,%s', $this->route('id'))],
+            'model_id' => ['sometimes', 'numeric', 'exists:models,id'],
+            'color' => ['sometimes', 'string'],
+            'mileage' => ['sometimes', 'numeric'],
+            'issued' => ['sometimes', 'date'],
+        ];
+    }
+
+    public function toData(): CarData
+    {
+        return CarData::make($this->validated());
     }
 }
