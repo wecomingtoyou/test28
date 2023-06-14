@@ -24,6 +24,7 @@ final class CarResource extends AbstractResource
     protected function getAttributes(): array
     {
         return [
+            'vin' => $this->vin,
             'color' => $this->color,
             'mileage' => $this->mileage,
             'issued' => $this->issued,

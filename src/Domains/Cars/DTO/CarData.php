@@ -21,7 +21,7 @@ final class CarData extends AbstractData
         );
 
         $static->color = $payload['color'] ?? null;
-        $static->mileage = $payload['mileage'] ?? null;
+        $static->mileage = $payload['mileage'] ? (int) $payload['mileage'] : null;
         $static->issued = $payload['issued'] ?? null;
 
         return $static;
