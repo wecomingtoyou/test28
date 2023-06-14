@@ -156,18 +156,14 @@ return [
     */
 
     'providers' => ServiceProvider::defaultProviders()->merge([
-        /*
-         * Package Service Providers...
-         */
-
-        /*
-         * Application Service Providers...
-         */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
+        \Shared\Providers\AppServiceProvider::class,
+        \Shared\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        \Infrastructure\Events\EventServiceProvider::class,
+        \Shared\Providers\RouteServiceProvider::class,
+
+        \Infrastructure\Commands\CommandServiceProvider::class,
+        \Infrastructure\Repositories\RepositoryServiceProvider::class,
     ])->toArray(),
 
     /*
