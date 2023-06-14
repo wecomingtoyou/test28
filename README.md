@@ -24,6 +24,8 @@ docker compose exec php php artisan db:seed
 
 ### API
 
+postman: https://www.postman.com/xworksteam/workspace/test/collection/24958248-92777384-73ae-41c8-b117-fe6aa6d53cd6
+
 #### model listing
 ```bash
 curl --location 'http://127.0.0.1:8787/api/v1/models'
