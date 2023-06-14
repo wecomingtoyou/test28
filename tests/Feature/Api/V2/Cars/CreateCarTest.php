@@ -35,11 +35,7 @@ final class CreateCarTest extends TestCase
         );
 
         $response->assertSuccessful();
-        $response->assertJsonStructure(['data' => [
-            'id', 'type',
-            'attributes',
-            'relations'
-        ]]);
+        $response->assertJsonStructure(['data' => ['id', 'type', 'attributes', 'relations']]);
 
         $this->assertDatabaseHas(Car::class, ['vin' => $model->vin]);
 
