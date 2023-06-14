@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    private string $apiNamespace = '';
+    private string $apiNamespace = 'Apps\Api\V1\Controllers';
 
     public function boot(): void
     {
@@ -21,7 +21,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api/v1')
-                ->group(base_path('routes/api/api.php'));
+                ->name('api:v1:')
+                ->namespace($this->apiNamespace)
+                ->group(base_path('routes/api/v1.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));

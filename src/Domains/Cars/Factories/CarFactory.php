@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Domains\Cars\Factories;
 
+use Domains\Brands\Models\Brand;
 use Domains\Cars\Models\Car;
-use Domains\Cars\Models\CarBrand;
-use Domains\Cars\Models\CarModel;
+use Domains\Models\Models\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 final class CarFactory extends Factory
@@ -19,8 +19,8 @@ final class CarFactory extends Factory
             'mileage' => $this->faker->numberBetween(1000, 100000),
             'color' => $this->faker->colorName,
             'issued_at' => $this->faker->dateTime,
-            'model_id' => CarModel::factory(),
-            'brand_id' => CarBrand::factory(),
+            'model_id' => Model::factory(),
+            'brand_id' => Brand::factory(),
         ];
     }
 }

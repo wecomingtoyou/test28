@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Domains\Cars\Models;
+namespace Domains\Models\Models;
 
+use Domains\Brands\Models\Brand;
+use Domains\Cars\Models\Car;
+use Domains\Models\Factories\ModelFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Shared\Models\EloquentModel;
 
-final class CarModel extends EloquentModel
+final class Model extends EloquentModel
 {
     protected $fillable = [
         'name', 'brand_id'
@@ -16,7 +19,7 @@ final class CarModel extends EloquentModel
 
     public function brand(): BelongsTo
     {
-        return $this->belongsTo(CarBrand::class);
+        return $this->belongsTo(Brand::class);
     }
 
     public function cars(): HasMany
@@ -24,8 +27,8 @@ final class CarModel extends EloquentModel
         return $this->hasMany(Car::class);
     }
 
-    protected static function newFactory(): array
+    protected static function newFactory(): ModelFactory
     {
-        return new CarModel();
+        return new ModelFactory();
     }
 }

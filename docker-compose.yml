@@ -1,0 +1,81 @@
+version: "3.7"
+
+services:
+  ## NGINX
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: ${DOCKER_NAME}_nginx
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/logs:/var/log/nginx:rw
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    links:
+      - php
+    ports:
+      - ${DOCKER_PORT_BACKEND}:80
+    depends_on:
+      - php
+    restart: on-failure
+    networks:
+      - cars
+  ## APP
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: ${DOCKER_NAME}_php
+    user: ${DOCKER_GID}:${DOCKER_UID}
+    volumes:
+      - ./:/var/www
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/docker-php-config.ini
+    links:
+      - mysql
+      - redis
+    restart: on-failure
+    networks:
+      - cars
+  ## SCHEDULER
+  scheduler:
+    build:
+      context: .
+      dockerfile: docker/scheduler/Dockerfile
+    container_name: ${DOCKER_NAME}_scheduler
+    volumes:
+      - ./:/var/www
+      - ./docker/scheduler/conf.d:/etc/supervisor/conf.d
+      - ./docker/scheduler/supervisord.conf:/etc/supervisor/supervisord.conf
+    links:
+      - mysql
+      - redis
+    restart: on-failure
+    networks:
+      - cars
+  ## MYSQL
+  mysql:
+    image: ${DOCKER_IMAGE_MARIADB}
+    container_name: ${DOCKER_NAME}_mysql
+    environment:
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD_ROOT}
+    volumes:
+      - database:/var/lib/mysql
+    networks:
+      - cars
+  ## REDIS
+  redis:
+    image: ${DOCKER_IMAGE_REDIS}
+    container_name: ${DOCKER_NAME}_redis
+    restart: on-failure
+    networks:
+      - cars
+## VOLUMES
+volumes:
+  database:
+## NETWORKS
+networks:
+  cars:
+    driver: bridge

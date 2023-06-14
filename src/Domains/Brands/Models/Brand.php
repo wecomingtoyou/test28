@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Domains\Cars\Models;
+namespace Domains\Brands\Models;
 
-use Domains\Cars\Factories\CarFactory;
+use Domains\Brands\Factories\BrandFactory;
+use Domains\Cars\Models\Car;
+use Domains\Models\Models\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Shared\Models\EloquentModel;
 
-final class CarBrand extends EloquentModel
+final class Brand extends EloquentModel
 {
     protected $fillable = [
         'name'
@@ -16,7 +18,7 @@ final class CarBrand extends EloquentModel
 
     public function models(): HasMany
     {
-        return $this->hasMany(CarModel::class);
+        return $this->hasMany(Model::class);
     }
 
     public function cars(): HasMany
@@ -24,8 +26,8 @@ final class CarBrand extends EloquentModel
         return $this->hasMany(Car::class);
     }
 
-    protected static function newFactory(): CarFactory
+    protected static function newFactory(): BrandFactory
     {
-        return new CarBrand();
+        return new BrandFactory();
     }
 }
