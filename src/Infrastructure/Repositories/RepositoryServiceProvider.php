@@ -8,9 +8,12 @@ use Domains\Brands\Contracts\BrandRepository;
 use Domains\Brands\Models\Brand;
 use Domains\Cars\Contracts\CarRepository;
 use Domains\Cars\Models\Car;
+use Domains\Models\Contracts\ModelRepository;
+use Domains\Models\Models\Model;
 use Illuminate\Support\ServiceProvider;
 use Infrastructure\Repositories\Brands\BrandEloquentRepository;
 use Infrastructure\Repositories\Cars\CarEloquentRepository;
+use Infrastructure\Repositories\Models\ModelEloquentRepository;
 use Spatie\QueryBuilder\QueryBuilder;
 
 final class RepositoryServiceProvider extends ServiceProvider
@@ -25,6 +28,16 @@ final class RepositoryServiceProvider extends ServiceProvider
                         subject: Brand::class
                     )
                 )
+        );
+
+        $this->app->bind(
+            abstract: ModelRepository::class,
+            concrete: static fn(): ModelEloquentRepository =>
+            new ModelEloquentRepository(
+                builder: QueryBuilder::for(
+                    subject: Model::class
+                )
+            )
         );
 
         $this->app->bind(

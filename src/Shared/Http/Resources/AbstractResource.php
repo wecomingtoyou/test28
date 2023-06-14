@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 abstract class AbstractResource extends JsonResource
 {
-    abstract protected function getId(): string;
+    abstract protected function getId(): string; // потомучто может быть uuid
     abstract protected function getType(): string;
     abstract protected function getAttributes(): array;
     abstract protected function getRelations(): array;
@@ -26,8 +26,8 @@ abstract class AbstractResource extends JsonResource
             $data['timestamps'] = TimestampResource::make($this);
         }
 
-        if (! empty($relstions = $this->getRelations())) {
-            $data['relations'] = $relstions;
+        if (! empty($this->getRelations())) {
+            $data['relations'] = $this->getRelations();
         }
 
         return $data;

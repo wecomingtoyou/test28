@@ -21,7 +21,7 @@ final class IndexController extends ApiController
     {
         return BrandResource::collection(
             resource: $this->repository->paginate(
-                limit: (int) $request->get('per_page', 10)
+                limit: $this->perPage()
             )
         );
     }
