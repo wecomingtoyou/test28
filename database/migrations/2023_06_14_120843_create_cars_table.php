@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Domains\Brands\Models\Brand;
 use Domains\Models\Models\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,20 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('color', 12)->nullable();
             $table->unsignedInteger('mileage')->nullable();
-            $table->date('issued_at')->nullable();
+            $table->date('issued')->nullable();
             $table->timestamps();
 
-            $table->foreignIdFor(Brand::class)
-                ->references('id')
-                ->on('brands')
-                ->cascadeOnDelete();
-
             $table->foreignIdFor(Model::class)
+                ->unique()
                 ->references('id')
                 ->on('models')
                 ->cascadeOnDelete();
-
-            $table->unique(['brand_id', 'model_id']);
         });
     }
 

@@ -12,6 +12,7 @@ final class BrandEloquentRepository extends EloquentRepository implements BrandR
 {
     public function paginate(int $limit = 10): Paginator
     {
-        return $this->builder()->paginate($limit);
+        return $this->builder()
+            ->paginate($limit);
     }
 }

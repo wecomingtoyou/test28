@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Domains\Cars\Contracts;
 
-use Illuminate\Support\Collection;
+use Illuminate\Contracts\Pagination\Paginator;
 
 interface CarRepository
 {
-    public function brands(): Collection;
+    public function paginate(int $limit = 10): Paginator;
 }

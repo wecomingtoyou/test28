@@ -8,7 +8,6 @@ use Apps\Api\ApiController;
 use Apps\Api\V1\Resources\Brands\BrandResource;
 use Domains\Brands\Contracts\BrandRepository;
 use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Http\Request;
 
 final class IndexController extends ApiController
 {
@@ -17,7 +16,7 @@ final class IndexController extends ApiController
     ) {
     }
 
-    public function __invoke(Request $request): Responsable
+    public function __invoke(): Responsable
     {
         return BrandResource::collection(
             resource: $this->repository->paginate(

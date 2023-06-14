@@ -22,7 +22,7 @@ final class BrandResource extends AbstractResource
 
     protected function getAttributes(): array
     {
-        return ['name' => $this->name,];
+        return ['name' => $this->name];
     }
 
     protected function getRelations(): array

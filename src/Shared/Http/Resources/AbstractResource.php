@@ -9,6 +9,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 abstract class AbstractResource extends JsonResource
 {
+    const TIMESTAMP_FORMAT = 'Y-m-d H:i:s';
+
     abstract protected function getId(): string; // потомучто может быть uuid
     abstract protected function getType(): string;
     abstract protected function getAttributes(): array;
@@ -21,10 +23,6 @@ abstract class AbstractResource extends JsonResource
             'type' => $this->getType(),
             'attributes' => $this->getAttributes(),
         ];
-
-        if (isset($this->created_at) && isset($this->updated_at)) {
-            $data['timestamps'] = TimestampResource::make($this);
-        }
 
         if (! empty($this->getRelations())) {
             $data['relations'] = $this->getRelations();

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Api\V2\Models;
 
-use Domains\Brands\Models\Brand;
 use Domains\Models\Models\Model;
 use Tests\TestCase;
 
@@ -15,7 +14,6 @@ final class IndexModelTest extends TestCase
         parent::setUp();
 
         Model::factory(10)
-            ->for(Brand::factory())
             ->create();
     }
 

@@ -8,7 +8,6 @@ use Apps\Api\ApiController;
 use Apps\Api\V1\Resources\Models\ModelResource;
 use Domains\Models\Contracts\ModelRepository;
 use Illuminate\Contracts\Support\Responsable;
-use Illuminate\Http\Request;
 
 final class IndexController extends ApiController
 {
@@ -17,11 +16,11 @@ final class IndexController extends ApiController
     ) {
     }
 
-    public function __invoke(Request $request): Responsable
+    public function __invoke(): Responsable
     {
         return ModelResource::collection(
            resource: $this->repository->paginate(
-               limit: $this->perPage()
+               limit: $this->perPage(),
             )
         );
     }
