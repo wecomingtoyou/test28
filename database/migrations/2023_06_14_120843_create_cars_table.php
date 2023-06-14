@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->uuid('vin')->unique(); // в любом случаи нужен уник id (в тз инфы нету)
+            $table->string('vin')->unique(); // в любом случаи нужен уник id (в тз инфы нету)
             $table->string('color', 12)->nullable();
             $table->unsignedInteger('mileage')->nullable();
             $table->date('issued')->nullable();
