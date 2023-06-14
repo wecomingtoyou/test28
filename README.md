@@ -19,6 +19,7 @@ docker compose exec php php artisan key:generate
 ### fake data
 
 ```bash
+docker compose exec php php artisan migrate
 docker compose exec php php artisan db:seed
 ```
 
